@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class BookReader
 {
-    constructor(books: any) {
+    constructor(books: any, state: ReaderState) {
         this.books = books;
-        this.state = new ReaderState();
+        this.state = state || new ReaderState();
     }
 
     private books: any;
-    private state: ReaderState;
+    public state: ReaderState;
 
     get currentChapter() {
         return this.currentPart
@@ -26,27 +26,47 @@ export class BookReader
     }
 
     nextBook() : void {
-        if(++this.state.bookIndex > this.books.length) {
+        if(++this.state.bookIndex >= this.books.length) {
             this.state.bookIndex = 0;
         }
         this.state.partIndex = 0;
     }
 
+    prevBook() : void {
+        if(--this.state.bookIndex < 0) {
+            this.state.bookIndex = this.books.length - 1;
+        }
+        this.state.partIndex = this.currentBook.Parts.length - 1;
+    }
+
     nextPart() : void {
-        if(++this.state.partIndex > this.currentBook.Parts.length) {
+        if(++this.state.partIndex >= this.currentBook.Parts.length) {
             this.nextBook();
         }
         this.state.chapterIndex = 0;
     }
 
+    prevPart() : void {
+        if(--this.state.partIndex < 0) {
+            this.prevBook();
+        }
+        this.state.chapterIndex = this.currentPart.Chapters.length - 1;
+    }
+
     nextChapter() : void {
-        if(++this.state.chapterIndex > this.currentPart.Chapters.length) {
+        if(++this.state.chapterIndex >= this.currentPart.Chapters.length) {
             this.nextPart();
+        }
+    }
+
+    prevChapter() : void {
+        if(--this.state.chapterIndex < 0) {
+            this.prevPart();
         }
     }
 }
 
-class ReaderState
+export class ReaderState
 {
     bookIndex: number = 0;
     partIndex: number = 0;

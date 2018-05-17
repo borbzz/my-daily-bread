@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from './service';
-import { BookReader } from './core';
+import { BookReader, ReaderState } from './core';
 
 @Component({
   selector: 'app-root',
@@ -11,24 +11,24 @@ import { BookReader } from './core';
 export class AppComponent {
   title = 'app';
 
-  data: BookReader;
-
-  current = {
-    book: 0,
-    chapter: 0
-  }
+  book: BookReader;
+  dataService: DataService;
 
   constructor(dataService: DataService) {
+    this.dataService = dataService;
+
     dataService.get()
-      .subscribe(data => this.data = new BookReader(data));
+      .subscribe(data => this.book = new BookReader(data, dataService.state));
   }
 
   prev() {
-    this.data.nextChapter();
+    this.book.prevChapter();
+    this.dataService.state = this.book.state;
   }
 
   next() {
-    this.data.nextChapter();
+    this.book.nextChapter();
+    this.dataService.state = this.book.state;
   }
 
   

@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import "rxjs/add/operator/do";
 
+import { ReaderState } from './core';
+
 
 @Injectable()
 export class DataService {
@@ -16,6 +18,19 @@ export class DataService {
         return this.getFromCache() ||
                 this.getFromServer();
     }
+
+    get state() : ReaderState {
+        var json = localStorage.getItem('state');
+
+        return json
+            ? JSON.parse(json)
+            : new ReaderState();
+    }
+    
+    set state(state: ReaderState) {
+        localStorage.setItem('state', JSON.stringify(state));
+    }
+
 
     /**
      * attempts to retrieve the book from localstorage

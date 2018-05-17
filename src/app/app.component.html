@@ -2,26 +2,9 @@
 
 <button (click)="prev()">&lt;--</button>
 <button (click)="next()">--&gt;</button>
-{{data.currentBook.Title}} {{data.currentBook.SubTitle}} <br/>
-{{data.currentPart.Title}} {{data.currentPart.SubTitle}}
-<pre>{{data.currentChapter | json}}</pre>
-<ul>
-  <li *ngFor="let b of data">
-    <strong>{{b.Title}}</strong>
-    <small>{{b.Description}}</small>
-    <ul>
-      <li *ngFor="let p of b.Parts">
-        <strong>{{p.Title}}</strong>
-        {{p.SubTitle}}
-        <ul>
-          <li *ngFor="let c of p.Chapters">
-            <strong>{{c.Title}}</strong>
-            {{c.SubTitle}}
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
+{{book.currentBook.Title}} {{book.currentBook.SubTitle}} <br/>
+{{book.currentPart.Title}} {{book.currentPart.SubTitle}}
+<pre>{{book.currentChapter | json}}</pre>
 
-
+<hr />
+<p>{{book.currentPart.Description || 'No Description' | json}}</p>
