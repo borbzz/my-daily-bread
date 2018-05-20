@@ -14,7 +14,7 @@ export class DataService {
     /**
      * retrieves the book
      */
-    get() : Observable<Object> {      
+    get() : Observable<any> {      
         return this.getFromCache() ||
                 this.getFromServer();
     }
@@ -26,7 +26,7 @@ export class DataService {
             ? JSON.parse(json)
             : new ReaderState();
     }
-    
+
     set state(state: ReaderState) {
         localStorage.setItem('state', JSON.stringify(state));
     }
@@ -38,8 +38,9 @@ export class DataService {
     private getFromCache() : Observable<Object> {
         var json = localStorage.getItem('mdb');
 
+        var data = JSON.parse(json);
         return json
-            ? Observable.of(JSON.parse(json))
+            ? Observable.of(data)
             : null;
     }
 
