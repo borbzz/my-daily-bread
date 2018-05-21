@@ -82,6 +82,7 @@ export class ReaderState
     public partIndex: number;
     public chapterIndex: number;
     public lastUpdated: Date;
+    public readChapters: any;
 
     constructor(anyObject : any = null) {
         if (anyObject) {
@@ -89,20 +90,35 @@ export class ReaderState
             this.chapterIndex = anyObject.chapterIndex || 0;
             this.partIndex = anyObject.partIndex || 0;
             this.lastUpdated = anyObject.lastUpdated || new Date();
+            this.readChapters = anyObject.readChapters || {};
         }
         else { 
             this.reset();
         }
     }
 
+    public isRead() : boolean {
+        return !!this.readChapters[this.getKey()];
+    }
+
     public touch() : void {
         this.lastUpdated = new Date();
+        this.readChapters[this.getKey()] = true;
+    }
+
+    public unread() : void {
+        this.readChapters[this.getKey()] = false;
     }
 
     private reset() : void {
         this.bookIndex = 0;
         this.partIndex = 0;
         this.chapterIndex = 0;
+        this.readChapters = {};
         this.touch();
+    }
+
+    private getKey() : string {
+        return `${this.bookIndex}:${this.partIndex}:${this.chapterIndex}`;
     }
 }
