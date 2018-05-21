@@ -18,7 +18,7 @@ export class AppComponent {
     this.dataService = dataService;
 
     dataService.get()
-      .subscribe(data => this.book = new BookReader(data, dataService.state));
+      .subscribe(data => this.book = new BookReader(data, new ReaderState(dataService.state)));
   }
 
   prev() {

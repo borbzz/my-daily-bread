@@ -24,7 +24,7 @@ export class DataService {
 
         return json
             ? JSON.parse(json)
-            : new ReaderState();
+            : null;
     }
 
     set state(state: ReaderState) {
@@ -35,7 +35,7 @@ export class DataService {
     /**
      * attempts to retrieve the book from localstorage
      */
-    private getFromCache() : Observable<Object> {
+    private getFromCache() : Observable<any> {
         var json = localStorage.getItem('mdb');
 
         var data = JSON.parse(json);
@@ -47,7 +47,7 @@ export class DataService {
     /**
      * retrieves the book from the server, caching the result
      */
-    private getFromServer() : Observable<Object> {
+    private getFromServer() : Observable<any> {
         return this.http
             .get('assets/mydailybread.json')
             .do(books => localStorage.setItem('mdb', JSON.stringify(books)));

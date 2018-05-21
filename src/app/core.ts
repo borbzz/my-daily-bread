@@ -30,6 +30,7 @@ export class BookReader
     }
 
     nextBook() : void {
+        this.state.touch();
         if(++this.state.bookIndex >= this.books.length) {
             this.state.bookIndex = 0;
         }
@@ -37,6 +38,7 @@ export class BookReader
     }
 
     prevBook() : void {
+        this.state.touch();
         if(--this.state.bookIndex < 0) {
             this.state.bookIndex = this.books.length - 1;
         }
@@ -44,6 +46,7 @@ export class BookReader
     }
 
     nextPart() : void {
+        this.state.touch();
         if(++this.state.partIndex >= this.currentBook.Parts.length) {
             this.nextBook();
         }
@@ -51,6 +54,7 @@ export class BookReader
     }
 
     prevPart() : void {
+        this.state.touch();
         if(--this.state.partIndex < 0) {
             this.prevBook();
         }
@@ -58,12 +62,14 @@ export class BookReader
     }
 
     nextChapter() : void {
+        this.state.touch();
         if(++this.state.chapterIndex >= this.currentPart.Chapters.length) {
             this.nextPart();
         }
     }
 
     prevChapter() : void {
+        this.state.touch();
         if(--this.state.chapterIndex < 0) {
             this.prevPart();
         }
@@ -72,54 +78,31 @@ export class BookReader
 
 export class ReaderState
 {
-    private _bookIndex: number;
-    private _partIndex: number;
-    private _chapterIndex: number;
-    private _lastUpdated: Date;
+    public bookIndex: number;
+    public partIndex: number;
+    public chapterIndex: number;
+    public lastUpdated: Date;
 
-    constructor() {
-        this.reset();
-    }
-
-    get bookIndex() : number { 
-        return this._bookIndex;
-    }
-    set bookIndex(index : number) {
-        this._bookIndex = index;
-        this.touch();
-    }
-
-    get partIndex() : number {
-        return this._partIndex;
-    }
-    set partIndex(index : number) {
-        this._bookIndex = index;
-        this.touch();
+    constructor(anyObject : any = null) {
+        if (anyObject) {
+            this.bookIndex = anyObject.bookIndex || 0;
+            this.chapterIndex = anyObject.chapterIndex || 0;
+            this.partIndex = anyObject.partIndex || 0;
+            this.lastUpdated = anyObject.lastUpdated || new Date();
+        }
+        else { 
+            this.reset();
+        }
     }
 
-    get chapterIndex() : number {
-        return this._chapterIndex;
-    }
-    set chapterIndex(index: number) {
-        this._chapterIndex = index;
-        this.touch();
-    }
-
-    get lastUpdated() : Date {
-        return this._lastUpdated;
-    }
-    set lastUpdated(date: Date) {
-        this._lastUpdated = date;
-    }
-
-    private touch() : void {
-        this._lastUpdated = new Date();
+    public touch() : void {
+        this.lastUpdated = new Date();
     }
 
     private reset() : void {
-        this._bookIndex = 0;
-        this._partIndex = 0;
-        this._chapterIndex = 0;
+        this.bookIndex = 0;
+        this.partIndex = 0;
+        this.chapterIndex = 0;
         this.touch();
     }
 }
