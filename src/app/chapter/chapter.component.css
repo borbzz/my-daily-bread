@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
+
+.chapter {
+    font-family: 'Merriweather', serif;
+    padding: 1em 2em;
+    background-color: #fcf4e9
+}
+
+.chapter h2, .chapter h3 {
+    text-align: center;
+    width: 100%;
+}
+
+.chapter h4 {
+    color: #cf2507;
+    text-transform: uppercase;
+}
+
+.chapter p {
+    line-height: 30pt;
+    font-size: 16pt;
+    letter-spacing: 0.25pt;
+}

@@ -8,11 +8,13 @@ import { JsonPipe } from '@angular/common'
 import { AppComponent } from './app.component';
 import { DataService } from './service'
 import { environment } from '../environments/environment';
+import { ChapterComponent } from './chapter/chapter.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChapterComponent
   ],
   imports: [
     BrowserModule,
