@@ -13,6 +13,7 @@ export class AppComponent {
 
   book: BookReader;
   dataService: DataService;
+  showToc: boolean = false;
 
   constructor(dataService: DataService) {
     this.dataService = dataService;
@@ -31,5 +32,7 @@ export class AppComponent {
     this.dataService.state = this.book.state;
   }
 
-  
+  toc() {
+    this.showToc = !this.showToc;
+  }
 }

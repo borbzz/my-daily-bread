@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { DataService } from './service'
 import { environment } from '../environments/environment';
 import { ChapterComponent } from './chapter/chapter.component';
+import { ContentsComponent } from './contents/contents.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChapterComponent
+    ChapterComponent,
+    ContentsComponent
   ],
   imports: [
     BrowserModule,

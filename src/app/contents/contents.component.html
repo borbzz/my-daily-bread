@@ -1,0 +1,19 @@
+<ul>
+  <li *ngFor="let b of reader.books">
+    {{b.Title}}
+
+    <ul>
+      <li *ngFor="let p of b.Parts">
+        {{p.Title}}
+
+        <ul>
+          <li *ngFor="let c of p.Chapters">
+            <span *ngIf="reader.state.isRead()">*</span>{{c.Title}} - {{c.SubTitle}}
+          </li>
+        </ul>
+
+      </li>
+    </ul>
+
+  </li>
+</ul>

@@ -8,7 +8,7 @@ export class BookReader
         this.state = state || new ReaderState();
     }
 
-    private books: any;
+    public books: any;
     public state: ReaderState;
 
     get currentChapter() {
@@ -119,6 +119,10 @@ export class ReaderState
     }
 
     private getKey() : string {
-        return `${this.bookIndex}:${this.partIndex}:${this.chapterIndex}`;
+        return ReaderState.getKey(this.bookIndex, this.partIndex, this.chapterIndex);
+    }
+
+    private static getKey(bookIndex, partIndex, chapterIndex) : string {
+        return `${bookIndex}:${partIndex}:${chapterIndex}`;
     }
 }
