@@ -1,0 +1,14 @@
+{{book.lastRead | date: 'MM/dd/yyyy hh:mm:ss a'}}
+<br/>
+<button (click)="prev()">&lt;--</button>
+<button (click)="next()">--&gt;</button>
+<button (click)="toc()">TOC</button>
+{{book.currentBook.Title}} {{book.currentBook.SubTitle}} <br/>
+{{book.currentPart.Title}} {{book.currentPart.SubTitle}}
+
+<app-contents *ngIf="showToc" [reader]="book"></app-contents>
+<app-chapter [chapter]="book.currentChapter"></app-chapter>
+<pre>{{book.currentChapter | json}}</pre>
+
+<hr />
+<p>{{book.currentPart.Description || 'No Description' | json}}</p>
