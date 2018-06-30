@@ -24,7 +24,7 @@ import routes from './app.routes';
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes, {enableTracing: !environment.production}),
+    //RouterModule.forRoot(routes, {enableTracing: !environment.production}),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

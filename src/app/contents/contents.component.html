@@ -1,14 +1,15 @@
-<ul>
-  <li *ngFor="let b of reader.books">
-    {{b.Title}}
+<ul class="list-unstyled">
+  <li *ngFor="let b of reader.books; let bi = index">
+    <h1>{{b.Title}}</h1>
 
-    <ul>
-      <li *ngFor="let p of b.Parts">
-        {{p.Title}}
+    <ul class="list-unstyled">
+      <li *ngFor="let p of b.Parts; let pi = index">
+        <h2>{{p.Title}}</h2>
 
-        <ul>
-          <li *ngFor="let c of p.Chapters">
-            <span *ngIf="reader.state.isRead()">*</span>{{c.Title}} - {{c.SubTitle}}
+        <ul class="list-unstyled">
+          <li *ngFor="let c of p.Chapters; let ci = index">
+            <span *ngIf="reader.state.isRead(bi, pi, ci)">*</span>
+            {{c.Title}} - {{c.SubTitle}}
           </li>
         </ul>
 

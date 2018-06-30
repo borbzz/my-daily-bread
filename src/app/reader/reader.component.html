@@ -1,10 +1,35 @@
-{{book.lastRead | date: 'MM/dd/yyyy hh:mm:ss a'}}
-<br/>
-<button (click)="prev()">&lt;--</button>
-<button (click)="next()">--&gt;</button>
-<button (click)="toc()">TOC</button>
-{{book.currentBook.Title}} {{book.currentBook.SubTitle}} <br/>
-{{book.currentPart.Title}} {{book.currentPart.SubTitle}}
+<nav class="navbar sticky-top navbar-light bg-light">
+    <form class="form-inline w-100">
+        <button type="button" class="btn btn-outline-danger btn-sm ml-0" (click)="prev()">
+            &lt;--
+        </button>
+
+        <div class="navbar-text text-danger mx-auto" (click)="toc()">
+            My Daily Bread
+        </div>
+
+        <button type="button" class="btn btn-outline-danger btn-sm mr-0" (click)="next()">
+            --&gt;
+        </button>
+
+
+    </form>
+</nav>
+
+<div class="container-fluid">
+    
+<div class="row">
+    
+</div>
+
+<div class="row">
+    <div class="col">
+        <h6 class="font-weight-light text-danger">
+            {{book.currentBook.SubTitle}} /
+            {{book.currentPart.SubTitle}}
+        </h6>
+    </div>
+</div>
 
 <app-contents *ngIf="showToc" [reader]="book"></app-contents>
 <app-chapter [chapter]="book.currentChapter"></app-chapter>
@@ -12,3 +37,4 @@
 
 <hr />
 <p>{{book.currentPart.Description || 'No Description' | json}}</p>
+</div>

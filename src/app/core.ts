@@ -97,8 +97,8 @@ export class ReaderState
         }
     }
 
-    public isRead() : boolean {
-        return !!this.readChapters[this.getKey()];
+    public isRead(bookIndex, partIndex, chapterIndex) : boolean {
+        return !!this.readChapters[ReaderState.getKey(bookIndex, partIndex, chapterIndex)];
     }
 
     public touch() : void {
